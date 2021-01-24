@@ -1,12 +1,22 @@
 import pygame as pg
+import Colors as color
 
+# Структура, которая хранит именованные размеры окна, px
 class Window:
     width = 640
     height = 480
-    
+
+# Класс, описывающий все кнопки
 class Button:
-    def __init__(self):
-        pass
+    # Конструктор
+    def __init__(self, text, color, x, y, width, height):
+        self.text = text
+        self.color = color
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+    
     def draw(self):
         pass
     def is_click(self):
@@ -19,6 +29,8 @@ class Button:
         pass
     def set_size(self):
         pass
+
+btn_yes = Button("YES", color.RED, 10, 10, 100, 30)
 
 FPS = 30
 
