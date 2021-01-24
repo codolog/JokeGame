@@ -19,7 +19,7 @@ class Button:
     
     # Рисование кнопки
     def draw(self, screen):
-        #            экран   цвет                         ширина      высота
+        #            экран   цвет         координаты      ширина      высота
         pg.draw.rect(screen, self.color, (self.x, self.y, self.width, self.height))
     
     def is_click(self):
@@ -41,7 +41,7 @@ class Button:
         self.width = width
         self.height = height
 
-btn_yes = Button("YES", color.RED, 10, 10, 100, 30)
+btn_yes = Button("YES", color.RED, 100, 100, 100, 30)
 
 FPS = 30
 
@@ -51,9 +51,13 @@ clock = pg.time.Clock()
 
 running = True
 while running:
+    screen.fill(color.WHITE)
     clock.tick(FPS)
+    
     for event in pg.event.get():
         if event.type == pg.QUIT:
             running = False
-
+   
+    btn_yes.draw(screen)
+    pg.display.update()
 pg.quit()
