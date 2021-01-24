@@ -22,8 +22,14 @@ class Button:
         #            экран   цвет         координаты      ширина      высота
         pg.draw.rect(screen, self.color, (self.x, self.y, self.width, self.height))
     
-    def is_click(self):
-        pass
+    # Находится ли мышка над кнопкой
+    def is_over(self, mouse_x, mouse_y):
+        if self.x < mouse_x < self.x + self.width and
+           self.y < mouse_y < self.y + self.height:
+            return True
+        else:
+            return False
+    
     def do(self):
         pass
     
@@ -42,6 +48,7 @@ class Button:
         self.height = height
 
 btn_yes = Button("YES", color.RED, 100, 100, 100, 30)
+btn_no = Button("NO", color.RED, 250, 100, 100, 30)
 
 FPS = 30
 
@@ -59,5 +66,6 @@ while running:
             running = False
    
     btn_yes.draw(screen)
+    btn_no.draw(screen)
     pg.display.update()
 pg.quit()
