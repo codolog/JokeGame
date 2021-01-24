@@ -17,18 +17,29 @@ class Button:
         self.width = width
         self.height = height
     
-    def draw(self):
-        pass
+    # Рисование кнопки
+    def draw(self, screen):
+        #            экран   цвет                         ширина      высота
+        pg.draw.rect(screen, self.color, (self.x, self.y, self.width, self.height))
+    
     def is_click(self):
         pass
     def do(self):
         pass
-    def set_text(self):
-        pass
-    def set_color(self):
-        pass
-    def set_size(self):
-        pass
+    
+    def jumpto(self, x, y):
+        self.x = x
+        self.y = y
+    
+    def set_text(self, text):
+        self.text = text
+        
+    def set_color(self, color):
+        self.color = color
+        
+    def set_size(self, width, height):
+        self.width = width
+        self.height = height
 
 btn_yes = Button("YES", color.RED, 10, 10, 100, 30)
 
