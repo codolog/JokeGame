@@ -1,5 +1,6 @@
 import pygame as pg
 import Colors as color
+import random as rnd
 
 # Структура, которая хранит именованные размеры окна, px
 class Window:
@@ -24,7 +25,7 @@ class Button:
     
     # Находится ли мышка над кнопкой
     def is_over(self, mouse_x, mouse_y):
-        if self.x < mouse_x < self.x + self.width and
+        if self.x < mouse_x < self.x + self.width and \
            self.y < mouse_y < self.y + self.height:
             return True
         else:
@@ -64,6 +65,13 @@ while running:
     for event in pg.event.get():
         if event.type == pg.QUIT:
             running = False
+        if event.type == pg.MOUSEMOTION:
+            x = event.pos[0]
+            y = event.pos[1]
+            if btn_no.is_over(x, y) == True:
+                new_x = rnd.randint(10, 300)
+                new_y = rnd.randint(10, 300)
+                btn_no.jumpto(new_x, new_y)
    
     btn_yes.draw(screen)
     btn_no.draw(screen)
