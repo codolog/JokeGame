@@ -2,6 +2,7 @@ import pygame as pg
 import Colors as color
 import random as rnd
 
+pg.init()
 # Структура, которая хранит именованные размеры окна, px
 class Window:
     width = 640
@@ -48,12 +49,16 @@ class Button:
         self.width = width
         self.height = height
 
+font = pg.font.SysFont('Arial', 30)
+text_question = font.render('Ты доволен зарплатой?', True, color.BLACK)
+text_yes = font.render('YES', True, color.BLACK)
+text_no = font.render('NO', True, color.BLACK)
+
 btn_yes = Button("YES", color.RED, 100, 100, 100, 30)
 btn_no = Button("NO", color.RED, 250, 100, 100, 30)
 
 FPS = 30
 
-pg.init()
 screen = pg.display.set_mode((Window.width, Window.height))
 clock = pg.time.Clock()
 
@@ -62,7 +67,8 @@ while running:
     screen.fill(color.WHITE)
     clock.tick(FPS)
     
-    for event in pg.event.get():
+    listEvents = pg.event.get()
+    for event in listEvents:
         if event.type == pg.QUIT:
             running = False
         if event.type == pg.MOUSEMOTION:
@@ -73,6 +79,7 @@ while running:
                 new_y = rnd.randint(10, 300)
                 btn_no.jumpto(new_x, new_y)
    
+    screen.blit(text_question, (50, 10))
     btn_yes.draw(screen)
     btn_no.draw(screen)
     pg.display.update()
