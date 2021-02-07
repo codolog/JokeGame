@@ -10,6 +10,9 @@ class Window:
 
 # Класс, описывающий все кнопки
 class Button:
+    isOver = False
+    isDown = False
+    isClick = False
     # Конструктор
     def __init__(self, text, color, x, y, width, height):
         self.text = text
@@ -62,23 +65,41 @@ FPS = 30
 screen = pg.display.set_mode((Window.width, Window.height))
 clock = pg.time.Clock()
 
+counter_click_yes = 0
+
 running = True
 while running:
     screen.fill(color.WHITE)
     clock.tick(FPS)
-    
+
     listEvents = pg.event.get()
     for event in listEvents:
         if event.type == pg.QUIT:
             running = False
         if event.type == pg.MOUSEMOTION:
-            x = event.pos[0]
-            y = event.pos[1]
+            x, y = event.pos
             if btn_no.is_over(x, y) == True:
                 new_x = rnd.randint(10, 300)
                 new_y = rnd.randint(10, 300)
                 btn_no.jumpto(new_x, new_y)
-   
+            btn_yes.isOver = btn_yes.is_over(x, y)
+        if event.type == pg.MOUSEBUTTONDOWN:
+            btn_yes.isDown = event.button == 1 and btn_yes.isOver
+        if event.type == pg.MOUSEBUTTONUP:
+            btn_yes.isClick = btn_yes.isDown and btn_yes.isOver
+
+    if btn_yes.isClick == True:
+        btn_yes.isClick = False
+        counter_click_yes += 1
+
+    if counter_click_yes == 2:
+        btn_yes.color = color.GREEN
+    elif counter_click_yes == 4:
+        btn_yes.color = color.BLUE
+    elif counter_click_yes > 5:
+        counter_click_yes = 0
+        btn_yes.color = color.RED
+        
     screen.blit(text_question, (50, 10))
     btn_yes.draw(screen)
     btn_no.draw(screen)
